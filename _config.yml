@@ -3,6 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
+<<<<<<< HEAD
 title: JZXiang‘s blog
 subtitle:
 description:技术博客
@@ -13,6 +14,18 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://yoursite.com
+=======
+title: JZXiang
+subtitle: subtitle
+description: 技术博客
+author: JZXiang
+language:zh
+timezone:Asia/Shanghai
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://JZXiang.com
+>>>>>>> origin/master
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
