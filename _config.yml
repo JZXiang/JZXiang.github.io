@@ -4,10 +4,10 @@
 
 # Site
 title: jzxiang
-subtitle: 副标题
+subtitle: jzxiang的个人博客
 description: 描述
 author: jzxiang
-language:
+language: zh
 timezone:
 
 # URL
@@ -60,14 +60,18 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+## 菜单
+
+ 
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:git
-  repo: 
-    github: https://github.com/JZXiang/JZXiang.github.io.git,master
+  type: git
+  repo: https://github.com/JZXiang/JZXiang.github.io.git
+  branch: master
