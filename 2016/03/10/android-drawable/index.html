@@ -31,50 +31,17 @@
 <p><code>&lt;size&gt;</code><br>    shape的大小，但是最终一般不是最终显示的大小，shape作为view的背景，它会自适应view的宽高。</p>
 <p><code>&lt;stroke&gt;</code><br>    shape的描边，有如下几个属性：<br>    <strong>android:width</strong> 描边的宽度;<br>    <strong>android:color</strong> 描边的颜色;<br>    <strong>android:dashWidth</strong> 组成虚线的线段的宽度;<br>    <strong>android:dashGap</strong> 组成虚线的线段之间的间隔，即虚线之间的空隙;<br>    <strong>注意</strong> dashWidth和dashGap有任何一个为0，那么虚线效果将不能生效。</p>
 <h3 id="LayerDrawable"><a href="#LayerDrawable" class="headerlink" title="LayerDrawable"></a>LayerDrawable</h3><p>LayerDrawable对应的xml根节点是<layer-list>,它表示一种层次化的Drawable集合，通过item子节点定义每一层的drawable，layer-list没有属性节点，只包含item子节点。语法如下所示:  </layer-list></p>
-<pre><code>``` xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;layer-list
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;
-&lt;item
-    android:drawable=&quot;@[package:]drawable/drawable_resource&quot;
-    android:id=&quot;@[+][package:]id/resource_name&quot;
-    android:top=&quot;dimension&quot;    
-    android:right=&quot;dimension&quot;
-    android:bottom=&quot;dimension&quot;
-    android:left=&quot;dimension&quot; /&gt;
-&lt;/layer-list&gt;
-```  
+<pre><code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">layer-list</span></span><br><span class="line">   	<span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> &gt;</span></span><br><span class="line">   	<span class="tag">&lt;<span class="name">item</span></span><br><span class="line">       	<span class="attr">android:drawable</span>=<span class="string">"@[package:]drawable/drawable_resource"</span></span><br><span class="line">       	<span class="attr">android:id</span>=<span class="string">"@[+][package:]id/resource_name"</span></span><br><span class="line">       	<span class="attr">android:top</span>=<span class="string">"dimension"</span>	</span><br><span class="line">       	<span class="attr">android:right</span>=<span class="string">"dimension"</span></span><br><span class="line">       	<span class="attr">android:bottom</span>=<span class="string">"dimension"</span></span><br><span class="line">       	<span class="attr">android:left</span>=<span class="string">"dimension"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </code></pre><p>每个item中常用的属性有<code>android:top</code>、<code>android:right</code>、<code>android:left</code>、<code>android:bottom</code>,分别表示Drawable相对于View的上下左右的偏移量。<br><code>android:drawable</code><br>已有的drawable资源id，也可以在item中自定义drawable。默认情况下xml中的所有Drawable都会被缩放至View的大小，对于bitmap来说，需要使用<code>android:gravity</code>才能控制图片的显示效果</p>
 <h3 id="StateListDrawable"><a href="#StateListDrawable" class="headerlink" title="StateListDrawable"></a>StateListDrawable</h3><p>StateListDrawable对应的xml根节点是\<selector\>标签，它也是Drawable的集合，每个Drawable都对应这View的一种状态，这样系统就会根据view的状态来选择相对应的Drawable。StateListDrawable主要用于设置可点击的View的背景，这种读者应该比较常用。它的语法如下所示:  </selector\></p>
-<pre><code>``` xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:constantSize=[&quot;true&quot; | &quot;false&quot;]
-    android:dither=[&quot;true&quot; | &quot;false&quot;]
-    android:variablePadding=[&quot;true&quot; | &quot;false&quot;] &gt;
-&lt;item
-    android:drawable=&quot;@[package:]drawable/drawable_resource&quot;
-    android:state_pressed=[&quot;true&quot; | &quot;false&quot;]
-    android:state_focused=[&quot;true&quot; | &quot;false&quot;]
-    android:state_hovered=[&quot;true&quot; | &quot;false&quot;]
-    android:state_selected=[&quot;true&quot; | &quot;false&quot;]
-    android:state_checkable=[&quot;true&quot; | &quot;false&quot;]
-    android:state_checked=[&quot;true&quot; | &quot;false&quot;]
-    android:state_enabled=[&quot;true&quot; | &quot;false&quot;]
-    android:state_activated=[&quot;true&quot; | &quot;false&quot;]
-    android:state_window_focused=[&quot;true&quot; | &quot;false&quot;] /&gt;
-&lt;/selector&gt;
-```  
+<pre><code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">   	<span class="attr">android:constantSize</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">   	<span class="attr">android:dither</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">   	<span class="attr">android:variablePadding</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"] &gt;</span></span><br><span class="line">   	<span class="tag">&lt;<span class="name">item</span></span><br><span class="line">       	<span class="attr">android:drawable</span>=<span class="string">"@[package:]drawable/drawable_resource"</span></span><br><span class="line">       	<span class="attr">android:state_pressed</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_focused</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_hovered</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_selected</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_checkable</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_checked</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_enabled</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_activated</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"]</span><br><span class="line">       	<span class="attr">android:state_window_focused</span>=<span class="string">["true"</span> | "<span class="attr">false</span>"] /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </code></pre><p><code>android:constanSize</code><br>StateListDrawable的固有大小是否不随着其状态的改变而改变，因为状态的改变导致StateListDrawable切换到具体的Drawable，而不同的Drawable具有不同的大小。True表示StateListDrawable的固有大小保持不变，这时它的固有大小是内部所有Drawable的固有大小的最大值，false则会随着状态的改变而改变。此选项默认值为false。</p>
 <p><code>android:dither</code><br>是否开启抖动效果，和BitmapDrawable中的dither属性相同。</p>
 <p><code>android:variablePadding</code><br>StateListDrawable的padding表示是否随着其状态的改变而改变，true表示会随着状态的改变而改变，false表示StateListDrawable的padding是内部所有Drawable的padding最大值。此选项默认值为false，不建议开启此选项。</p>
 <p><code>android:state_pressed</code><br>表示按下状态  </p>
 <p><code>android:state_focused</code><br>表示View获取到焦点</p>
-<p><code>android:state:state_hovered</code><br>光标是否停留在该View上，默认值为false。(支持Api 14以上)<br>这个没找到特别好的中文翻译，自己翻译的，详情请参考android官方api描述  </p>
-<pre><code>``` 
-Boolean. &quot;true&quot; if this item should be used when the object is being hovered by a cursor;     &quot;false&quot; if this item should be used in the default, non-hovered state. Often, this     drawable may be the same drawable used for the &quot;focused&quot; state.
-```  
-</code></pre><p><code>android:selected</code><br>用户是否选择了View </p>
+<p><code>android:state:state_hovered</code><br>光标是否停留在该View上，默认值为false。(支持Api 14以上)</p>
+<p><code>android:selected</code><br>用户是否选择了View </p>
 <p><code>android:state_checkable</code><br>用户是否选中了View，一般用在checkbox上  </p>
 <p><code>android:state_enabled</code><br>View当前是否处于可用状态</p>
 <p><code>android:activated</code><br>是否被激活。(支持Api 11以上)android官方api描述如下：</p>
