@@ -146,6 +146,114 @@ ShapeDrawable是一种很常见的Drawable，可以理解为通过颜色来构�
 	**android:dashGap** 组成虚线的线段之间的间隔，即虚线之间的空隙;   
 	**注意** dashWidth和dashGap有任何一个为0，那么虚线效果将不能生效。
 	
+### LayerDrawable
+LayerDrawable对应的xml根节点是<layer-list>,它表示一种层次化的Drawable集合，通过item子节点定义每一层的drawable，layer-list没有属性节点，只包含item子节点。语法如下所示:  
+
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<layer-list
+    	xmlns:android="http://schemas.android.com/apk/res/android" >
+    	<item
+        	android:drawable="@[package:]drawable/drawable_resource"
+        	android:id="@[+][package:]id/resource_name"
+        	android:top="dimension"	
+        	android:right="dimension"
+        	android:bottom="dimension"
+        	android:left="dimension" />
+	</layer-list>
+	```
+
+	
+每个item中常用的属性有``android:top``、``android:right``、``android:left``、``android:bottom``,分别表示Drawable相对于View的上下左右的偏移量。
+``android:drawable``  
+已有的drawable资源id，也可以在item中自定义drawable。默认情况下xml中的所有Drawable都会被缩放至View的大小，对于bitmap来说，需要使用``android:gravity``才能控制图片的显示效果
+
+### StateListDrawable
+StateListDrawable对应的xml根节点是\<selector\>标签，它也是Drawable的集合，每个Drawable都对应这View的一种状态，这样系统就会根据view的状态来选择相对应的Drawable。StateListDrawable主要用于设置可点击的View的背景，这种读者应该比较常用。它的语法如下所示:  
+
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:constantSize=["true" | "false"]
+    	android:dither=["true" | "false"]
+    	android:variablePadding=["true" | "false"] >
+    	<item
+        	android:drawable="@[package:]drawable/drawable_resource"
+        	android:state_pressed=["true" | "false"]
+        	android:state_focused=["true" | "false"]
+        	android:state_hovered=["true" | "false"]
+        	android:state_selected=["true" | "false"]
+        	android:state_checkable=["true" | "false"]
+        	android:state_checked=["true" | "false"]
+        	android:state_enabled=["true" | "false"]
+        	android:state_activated=["true" | "false"]
+        	android:state_window_focused=["true" | "false"] />
+	</selector>
+	```
+	
+``android:constanSize``  
+StateListDrawable的固有大小是否不随着其状态的改变而改变，因为状态的改变导致StateListDrawable切换到具体的Drawable，而不同的Drawable具有不同的大小。True表示StateListDrawable的固有大小保持不变，这时它的固有大小是内部所有Drawable的固有大小的最大值，false则会随着状态的改变而改变。此选项默认值为false。
+
+``android:dither``  
+是否开启抖动效果，和BitmapDrawable中的dither属性相同。
+
+``android:variablePadding``  
+StateListDrawable的padding表示是否随着其状态的改变而改变，true表示会随着状态的改变而改变，false表示StateListDrawable的padding是内部所有Drawable的padding最大值。此选项默认值为false，不建议开启此选项。
+
+``android:state_pressed``  
+表示按下状态  
+
+``android:state_focused``  
+表示View获取到焦点
+
+``android:state:state_hovered``  
+光标是否停留在该View上，默认值为false。(支持Api 14以上)
+	
+``android:selected``
+用户是否选择了View 
+
+``android:state_checkable``  
+用户是否选中了View，一般用在checkbox上  
+
+``android:state_enabled``
+View当前是否处于可用状态
+
+``android:activated``  
+是否被激活。(支持Api 11以上)android官方api描述如下：
+
+	Boolean. "true" if this item should be used when the object is activated as the persistent 	selection (such as to "highlight" the previously selected list item in a persistent 	navigation view); "false" if it should be used when the object is not activated.
+	
+``android:state_window_focused``  
+应用程序是否在前台，当有通知栏被拉下来或者一个对话框弹出的时候应用程序就不在前台了。
+
+**注意**:如果有多个item，那么程序将自动从上到下进行匹配，最先匹配的将得到应用。（不是通过最佳匹配）
+如果一个item没有任何的状态说明，那么它将可以被任何一个状态匹配。
+
+### LevelListDrawable
+LevelListDrawable对应的xml根节点是<level-list>标签，它同样表示一个Drawable集合，集合中的每个Drawable都有一个等级(level)的概念。根据不同的等级，LevelListDrawable会切换为对应的每个Drawable,它的语法如下所示：  
+
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<level-list
+    	xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@drawable/drawable_resource"
+        android:maxLevel="integer"
+        android:minLevel="integer" />
+	</level-list>
+	```
+每个item表示一个Drawable，并且有对应的等级范围，由``android:maxLevel``和``android:minLevel``来制定。
+
+
+
+
+
+	
+
+
+
+	
+
 
 	
 
