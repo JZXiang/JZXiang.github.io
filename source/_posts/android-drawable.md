@@ -244,11 +244,100 @@ LevelListDrawable对应的xml根节点是<level-list>标签，它同样表示一
 	```
 每个item表示一个Drawable，并且有对应的等级范围，由``android:maxLevel``和``android:minLevel``来制定。
 
+### TransitionDrawable  
+TransitionDrawable对应的xml根节点是<transition>标签，它用于实现两个Drawable之间的淡入淡出效果，语法如下所示:  
 
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<transition
+		xmlns:android="http://schemas.android.com/apk/res/android" >
+    	<item
+        	android:drawable="@[package:]drawable/drawable_resource"
+        	android:id="@[+][package:]id/resource_name"
+        	android:top="dimension"
+        	android:right="dimension"
+        	android:bottom="dimension"
+        	android:left="dimension" />
+	</transition>
+	```
+属性和上文重复的已经介绍过了，就不再重复介绍了。
 
+### InsetDrawable  
+InsetDrawable对应的xml根节点是<inset>标签，它可以将其它Drawable内签到自己当中，并可以在四周留出一定的间距。当一个View希望自己的背景比自己的时间区域小的时候，可以采用InsetDrawable来实现，同时我们知道，通过LayerDrawable也可以实现这种效果。语法如下所示：  
 
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<inset
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:drawable="@drawable/drawable_resource"
+    	android:insetTop="dimension"
+    	android:insetRight="dimension"
+    	android:insetBottom="dimension"
+    	android:insetLeft="dimension" />
+    ```
+    
+上面的属性可以按字面意思理解，其中``andorid:insetTop:``、``android:insetRight:``、``andorid:insetBottom:``和``android:insetLeft:``分别表示顶部、右边、底部和左边内凹的大小。
 
+### ScaleDrawable
+ScaleDrawable对应的xml根节点是<scale>标签,它可以根据自己的等级将指定的Drawable缩放到一定比例。语法如下所示：  
+
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<scale
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:drawable="@drawable/drawable_resource"
+	    android:scaleGravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
+	                          "fill_vertical" | "center_horizontal" | "fill_horizontal" |
+	                          "center" | "fill" | "clip_vertical" | "clip_horizontal"]
+	    android:scaleHeight="percentage"
+	    android:scaleWidth="percentage" />
+	```
 	
+上面的``android:scaleGravity``的含义等同于shape中的``andorid:gravity``,而``android:scaleWidth``和``android:scaleHeight``分别表示对指定Drawable宽和高的缩放比例，以百分比的形式表示，如25%.
+
+**注意** ScaleDrawable所在的View等级必须``不等于``0，ScaleDrawable才可以显示。下图是ScaleDrawable的draw方法，如下所示：
+
+	``` java
+		@Override
+	    public void draw(Canvas canvas) {
+	        if (mState.mDrawable.getLevel() != 0)
+	            mState.mDrawable.draw(canvas);
+	    }
+	```
+
+很明显，由于ScaleDrawable的等级和mDrawable的等级是保持一致的，所以如果ScaleDrawable的等级为0，它内部的mDrawable的等级也必然为0，这时mDrawable就无法被绘制出来，也就是ScaleDrawable不可见。所以使用ScaleDrawable的时候一定要设置它的等级，等级范围是1~10000.  
+
+### ClipDrawable
+ClipDrawable对应的xml根节点是标签，它可以根据自己当前的等级来裁剪另一个Drawable，裁剪方向可以通过``android:clipOrientation``和``android:gravity``这两个属性来共同控制，语法如下:
+
+	``` xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<clip
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:drawable="@drawable/drawable_resource"
+	    android:clipOrientation=["horizontal" | "vertical"]
+	    android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
+	                     "fill_vertical" | "center_horizontal" | "fill_horizontal" |
+	                     "center" | "fill" | "clip_vertical" | "clip_horizontal"] />                     
+	```
+	
+``android:clipOrientation``  
+裁剪方向，有水平和竖直两个方向，gravity的值比较多，需要和clipOrentation一起才能发挥作用。
+
+``android:gravity``  
+**top** 将内部的Drawable放在容器的顶部，不改变它的大小。如果为竖直裁剪，则从底部开始裁剪  
+**bottom** 将内部的Drawable放在容器的底部，不改变它的大小。如果为竖直裁剪，则从顶部开始裁剪 
+**left** 将内部的Drawable放在容器的左边，不改变它的大小。如果为水平裁剪，则从右边开始裁剪（默认值）  
+**right** 将内部的Drawable放在容器的右边，不改变它的大小。如果为水平裁剪，则从左边开始裁剪   
+**center_vertical** 使内部的Drawable在容器中竖直居中，不改变它的大小。如果为竖直裁剪，那么从上下同时开始裁剪   
+**fill_vertical** 使内部的Drawable在竖直方向上填充容器。如果为竖直裁剪，那么仅当ClipDrawable的等级为0(0表示ClipDrawable被完全裁剪，即不可见)时，才能有裁剪行为  
+**center_horizontal** 	使内部的Drawable在容器中水平居中，不改变它的大小。如果为水平裁剪，那么从左右两边同时开始裁剪   
+**fill_horizontal** 使内部的Drawable在水平方向上填充容器。如果为水平裁剪，那么仅当ClipDrawable的等级为0时，才能有裁剪行为  
+**center** 使内部的Drawable在容器中居中，不改变它的大小。如果为竖直裁剪，那么从上下同时开始裁剪；如果为水平方向，那么从左右同时开始裁剪
+**fill** 使内部的Drawable在水平和竖直方向上同时填充容器。仅当CLipDrawable的等级为0时，才能有裁剪行为  
+**clip_vertical** 附加选项，表示竖直方向的裁剪，较少使用  
+**clip_horizontal** 附加选项，表示水平方向的裁剪，较少使用
+
 
 
 
