@@ -1,7 +1,7 @@
 ---
 title: Android的Drawable汇总
 date: 2016-03-10 19:25:37
-tags: android drawable 
+tags: drawable 
 ---
 ## 简介
 Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实现一些特殊的UI效果。
