@@ -1,4 +1,284 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="描述"><title>Android的Drawable汇总 | jzxiang</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">jzxiang</a><span class="subtitle">jzxiang的个人博客</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">主页</a><a href="/archives" class="sidebar-nav-item">归档</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>Android的Drawable汇总</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2016-03-10</div><div class="post-tags"><a class="post-tag-link" href="/tags/android-drawable/">android drawable</a></div></div></div><article><div class="container post"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实现一些特殊的UI效果。</p>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android drawable," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的Drawable汇总">
+<meta property="og:url" content="http://JZXiang.com/2016/03/10/android-drawable/index.html">
+<meta property="og:site_name" content="jzxiang">
+<meta property="og:description" content="简介Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实">
+<meta property="og:updated_time" content="2016-03-14T02:26:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的Drawable汇总">
+<meta name="twitter:description" content="简介Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Android的Drawable汇总 | jzxiang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+    <div class="site-meta-headline">
+      <a>
+        <img class="custom-logo-image" src="http://img5.duitang.com/uploads/blog/201407/11/20140711171118_FxyTW.jpeg"
+             alt="jzxiang"/>
+      </a>
+    </div>
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">jzxiang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">jzxiang的个人博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android的Drawable汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-03-10T19:25:37+08:00" content="2016-03-10">
+              2016-03-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Android把可绘制的对象抽象为Drawable,不同的图形图像资源就代表着不同的drawable类型，Android FrameWork提供了一些具体实现。Drawable的种类很多，最常见的颜色和图片都是一个Drawable。本章的内容会比较简单，但是由于Drawable具体实现比较多，从而导致许多开发者对不同的Drawable的理解比较会乱。熟悉掌握各个Drawable实现可以快捷的实现一些特殊的UI效果。</p>
 <h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
 <li>使用简单，比自定义View的成本要低；</li>
 <li>非图片类型的Drawable占用空间较小，减小安装包的大小；</li>
@@ -67,6 +347,281 @@
 <pre><code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">clip</span></span><br><span class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:drawable</span>=<span class="string">"@drawable/drawable_resource"</span></span><br><span class="line">    <span class="attr">android:clipOrientation</span>=<span class="string">["horizontal"</span> | "<span class="attr">vertical</span>"]</span><br><span class="line">    <span class="attr">android:gravity</span>=<span class="string">["top"</span> | "<span class="attr">bottom</span>" | "<span class="attr">left</span>" | "<span class="attr">right</span>" | "<span class="attr">center_vertical</span>" |</span><br><span class="line">                     "<span class="attr">fill_vertical</span>" | "<span class="attr">center_horizontal</span>" | "<span class="attr">fill_horizontal</span>" |</span><br><span class="line">                     "<span class="attr">center</span>" | "<span class="attr">fill</span>" | "<span class="attr">clip_vertical</span>" | "<span class="attr">clip_horizontal</span>"] /&gt;</span></span><br></pre></td></tr></table></figure>
 </code></pre><p><code>android:clipOrientation</code><br>裁剪方向，有水平和竖直两个方向，gravity的值比较多，需要和clipOrentation一起才能发挥作用。</p>
 <p><code>android:gravity</code><br><strong>top</strong> 将内部的Drawable放在容器的顶部，不改变它的大小。如果为竖直裁剪，则从底部开始裁剪<br><strong>bottom</strong> 将内部的Drawable放在容器的底部，不改变它的大小。如果为竖直裁剪，则从顶部开始裁剪<br><strong>left</strong> 将内部的Drawable放在容器的左边，不改变它的大小。如果为水平裁剪，则从右边开始裁剪（默认值）<br><strong>right</strong> 将内部的Drawable放在容器的右边，不改变它的大小。如果为水平裁剪，则从左边开始裁剪<br><strong>center_vertical</strong> 使内部的Drawable在容器中竖直居中，不改变它的大小。如果为竖直裁剪，那么从上下同时开始裁剪<br><strong>fill_vertical</strong> 使内部的Drawable在竖直方向上填充容器。如果为竖直裁剪，那么仅当ClipDrawable的等级为0(0表示ClipDrawable被完全裁剪，即不可见)时，才能有裁剪行为<br><strong>center_horizontal</strong>     使内部的Drawable在容器中水平居中，不改变它的大小。如果为水平裁剪，那么从左右两边同时开始裁剪<br><strong>fill_horizontal</strong> 使内部的Drawable在水平方向上填充容器。如果为水平裁剪，那么仅当ClipDrawable的等级为0时，才能有裁剪行为<br><strong>center</strong> 使内部的Drawable在容器中居中，不改变它的大小。如果为竖直裁剪，那么从上下同时开始裁剪；如果为水平方向，那么从左右同时开始裁剪<br><strong>fill</strong> 使内部的Drawable在水平和竖直方向上同时填充容器。仅当CLipDrawable的等级为0时，才能有裁剪行为<br><strong>clip_vertical</strong> 附加选项，表示竖直方向的裁剪，较少使用<br><strong>clip_horizontal</strong> 附加选项，表示水平方向的裁剪，较少使用</p>
-</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:jiaozhengxiang@foxmail.com" target="_blank"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/JZXiang" target="_blank"><i class="fa fa-github"></i></a><a href="/atom.xml" target="_blank"><i class="fa fa-rss"></i></a></div><div class="footer">© 2016 <a href="/" rel="nofollow">jzxiang</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
-    $(".fancybox").fancybox();
-});</script></body></html>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android-drawable/" rel="tag">#android drawable</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/09/plan-2016/" rel="next" title="别在最能吃苦的年纪选择了安逸">
+                <i class="fa fa-chevron-left"></i> 别在最能吃苦的年纪选择了安逸
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/20/android-thread/" rel="prev" title="Android中的线程和线程池">
+                Android中的线程和线程池 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="jzxiang" />
+          <p class="site-author-name" itemprop="name">jzxiang</p>
+          <p class="site-description motion-element" itemprop="description">描述</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drawable的具体实现"><span class="nav-number">3.</span> <span class="nav-text">Drawable的具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BitmapDrawable"><span class="nav-number">3.0.1.</span> <span class="nav-text">BitmapDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NinePatchDrawable"><span class="nav-number">3.0.2.</span> <span class="nav-text">NinePatchDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShapeDrawable"><span class="nav-number">3.0.3.</span> <span class="nav-text">ShapeDrawable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LayerDrawable"><span class="nav-number">3.1.</span> <span class="nav-text">LayerDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StateListDrawable"><span class="nav-number">3.2.</span> <span class="nav-text">StateListDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LevelListDrawable"><span class="nav-number">3.3.</span> <span class="nav-text">LevelListDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransitionDrawable"><span class="nav-number">3.4.</span> <span class="nav-text">TransitionDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InsetDrawable"><span class="nav-number">3.5.</span> <span class="nav-text">InsetDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScaleDrawable"><span class="nav-number">3.6.</span> <span class="nav-text">ScaleDrawable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClipDrawable"><span class="nav-number">3.7.</span> <span class="nav-text">ClipDrawable</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jzxiang</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
