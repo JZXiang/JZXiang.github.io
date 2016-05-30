@@ -233,8 +233,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/20/android-thread/" itemprop="url">
-                  Android中的线程和线程池
+                <a class="post-title-link" href="/2016/05/30/TimePickerDialog/" itemprop="url">
+                  TimePickerDialog
                 </a>
               
             
@@ -247,8 +247,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T22:13:22+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-05-30T17:08:10+08:00" content="2016-05-30">
+              2016-05-30
             </time>
           </span>
 
@@ -258,8 +258,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/android-thread/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/android-thread/" itemprop="commentsCount"></span>
+                <a href="/2016/05/30/TimePickerDialog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/TimePickerDialog/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -284,19 +284,13 @@
       
         
           
-            <blockquote>
-<p>在操作系统中，线程是操作系统调度的最小单元，同时线程又是一种受限的系统资源，即线程不可能无限制地产生，并且线程的创建和销毁都会有相应的开销。当系统中存在大量的线程时，系统会通过时间片轮转的方式调度每个线程，因此线程不可能做到绝对的并行，除非线程数量小于等于CPU的核心数。本文源码基于Andoird5.1.1分析。</p>
-</blockquote>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>线程在Android上是一个很重要的概念，从用途上来讲分为主线程和子线程，主线程主要处理和界面相关的操作，而子线程则通常用来处理耗时操作。由于Android的主线程需要用来处理界面上的操作，这就导致主线程不能执行耗时操作，否则会造成界面上的卡顿，体验自然就下去了。</p>
-<p>除了Java自带的Thread外，在Android中可以扮演线程的角色还有很多，比如AsyncTask、IntentService和HandlerThread。虽然上述三种线程的表现形式都有别于传统的线程，但是它们的本质还是Thread。AsyncTask的底层用了线程池，IntentService和HandlerThread则直接使用了Thread。下边通过Android源码来分析下上述三种Android的线程。</p>
-<h4 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h4><p>AsyncTask是一种轻量级的异步任务类，它可以在线程池中处理后台任务，然后把处理结果传递给主线程，主线程通过结果进行UI方面的相关操作。AsyncTask的设计主要是对Thread和Handler的封装处理，<strong>但是AsyncTask不能用于处理长时间的耗时任务</strong>，耗时任务应控制在几秒内,如果需要处理耗时任务的话，应使用其它方式处理，比如Executor, ThreadPoolExecutor和FutureTask。Android官方文档描述如下：</p>
-<blockquote>
-<p>AsyncTask is designed to be a helper class around Thread and Handler and does not constitute a generic threading framework. AsyncTasks should ideally be used for short operations (a few seconds at the most.) If you need to keep threads running for long periods of time, it is highly recommended you use the various APIs provided by the java.util.concurrent package such as Executor, ThreadPoolExecutor and FutureTask.</p>
-</blockquote>
-<h5 id="AsyncTask用法"><a href="#AsyncTask用法" class="headerlink" title="AsyncTask用法"></a>AsyncTask用法</h5><p>AsyncTask是一个抽象泛型类，必须被继承才能使用。它提供了三个泛型参数（Params、Progress、Result）。</p>
-<p><strong>Params</strong> 参数的类型<br><strong>Progress</strong> 后台任务的执行进度的类型<br><strong>Result</strong> 任务的返回结果的类型  </p>
-<p>如果AsyncTask不需要参数传递具体的参数的话，这三个泛型参数可以用Void代替。</p>
-<p>AsyncTask提供了四个常用的方法<br><code>onPreExecute()</code> 在主线程中执行，在任务开始之前被调用，常用语处理一些准备操作。<br><code>doInBackground(Params...)</code> 在线程池中执行，此方法用于执行耗时任务。</p>
+            <h1 id="TimePickerDialog"><a href="#TimePickerDialog" class="headerlink" title="TimePickerDialog"></a>TimePickerDialog</h1><p>Android时间选择器，支持年月日时分，年月日，年月，月日时分，时分格式，可以设置最小时间（精确到分）  </p>
+<p><a href="https://github.com/JZXiang/PickerView/raw/master/sample-debug.apk" target="_blank" rel="external">APK下载</a></p>
+<p><a href="https://github.com/JZXiang/TimePickerDialog" target="_blank" rel="external">项目地址</a></p>
+<h2 id="使用gradle-依赖"><a href="#使用gradle-依赖" class="headerlink" title="使用gradle 依赖:"></a>使用gradle 依赖:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.jzxiang.pickerview:TimePickerDialog:0.9.2'</span></span><br></pre></td></tr></table></figure>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://github.com/JZXiang/PickerView/raw/master/preview/timepickerdialog_demo.gif" alt=""></p>
+<h2 id="示例配置"><a href="#示例配置" class="headerlink" title="示例配置"></a>示例配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mDialogAll = <span class="keyword">new</span> TimePickerDialog.Builder()</span><br><span class="line">                .setCallBack(<span class="keyword">this</span>)</span><br><span class="line">                .setCancelStringId(<span class="string">"cancel"</span>)</span><br><span class="line">                .setSureStringId(<span class="string">"sure"</span>)</span><br><span class="line">                .setTitleStringId(<span class="string">"TimePicker"</span>)</span><br><span class="line">                .setCyclic(<span class="keyword">false</span>)</span><br><span class="line">                .setMinMillseconds(System.currentTimeMillis())</span><br><span class="line">                .setCurrentMillseconds(System.currentTimeMillis())</span><br><span class="line">                .setThemeColor(getResources().getColor(R.color.timepicker_dialog_bg))</span><br><span class="line">                .setType(Type.ALL)</span><br><span class="line">                .setWheelItemTextNormalColor(getResources().getColor(R.color.timetimepicker_default_text_color))</span><br><span class="line">                .setWheelItemTextSelectorColor(getResources().getColor(R.color.timepicker_toolbar_bg))</span><br><span class="line">                .setWheelItemTextSize(<span class="number">12</span>)</span><br><span class="line">                .build();</span><br></pre></td></tr></table></figure>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p><a href="https://github.com/maarek/android-wheel" target="_blank" rel="external">android-wheel</a></p>
 
           
         
