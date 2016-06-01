@@ -284,14 +284,17 @@
       
         
           
-            <h1 id="TimePickerDialog"><a href="#TimePickerDialog" class="headerlink" title="TimePickerDialog"></a>TimePickerDialog</h1><p>Android时间选择器，支持年月日时分，年月日，年月，月日时分，时分格式，可以设置最小时间（精确到分）  </p>
+            <blockquote>
+<p>2016-06-01 23:00记<br>今天看了下GitHub发现star到200多了，吓到宝宝了，第一个轮子就这么火，截图纪念：<br><img src="https://raw.githubusercontent.com/JZXiang/JZXiang.github.io/blog_code/source/Image/TImePickerDialog-20160601.png" alt="">  </p>
+</blockquote>
+<hr>
+<p>Android时间选择器，支持年月日时分，年月日，年月，月日时分，时分格式，可以设置最小时间（精确到分）  </p>
 <p><a href="https://github.com/JZXiang/PickerView/raw/master/sample-debug.apk" target="_blank" rel="external">APK下载</a></p>
 <p><a href="https://github.com/JZXiang/TimePickerDialog" target="_blank" rel="external">项目地址</a></p>
 <h2 id="使用gradle-依赖"><a href="#使用gradle-依赖" class="headerlink" title="使用gradle 依赖:"></a>使用gradle 依赖:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.jzxiang.pickerview:TimePickerDialog:0.9.2'</span></span><br></pre></td></tr></table></figure>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://github.com/JZXiang/PickerView/raw/master/preview/timepickerdialog_demo.gif" alt=""></p>
 <h2 id="示例配置"><a href="#示例配置" class="headerlink" title="示例配置"></a>示例配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mDialogAll = <span class="keyword">new</span> TimePickerDialog.Builder()</span><br><span class="line">                .setCallBack(<span class="keyword">this</span>)</span><br><span class="line">                .setCancelStringId(<span class="string">"cancel"</span>)</span><br><span class="line">                .setSureStringId(<span class="string">"sure"</span>)</span><br><span class="line">                .setTitleStringId(<span class="string">"TimePicker"</span>)</span><br><span class="line">                .setCyclic(<span class="keyword">false</span>)</span><br><span class="line">                .setMinMillseconds(System.currentTimeMillis())</span><br><span class="line">                .setCurrentMillseconds(System.currentTimeMillis())</span><br><span class="line">                .setThemeColor(getResources().getColor(R.color.timepicker_dialog_bg))</span><br><span class="line">                .setType(Type.ALL)</span><br><span class="line">                .setWheelItemTextNormalColor(getResources().getColor(R.color.timetimepicker_default_text_color))</span><br><span class="line">                .setWheelItemTextSelectorColor(getResources().getColor(R.color.timepicker_toolbar_bg))</span><br><span class="line">                .setWheelItemTextSize(<span class="number">12</span>)</span><br><span class="line">                .build();</span><br></pre></td></tr></table></figure>
 <h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p><a href="https://github.com/maarek/android-wheel" target="_blank" rel="external">android-wheel</a></p>
-<h2 id="2016-06-01-23-00"><a href="#2016-06-01-23-00" class="headerlink" title="2016-06-01 23:00"></a>2016-06-01 23:00</h2><p>今天看了下GitHub发现star到200多了，吓到宝宝了，第一个轮子就这么火，截图纪念：<br><img src="https://raw.githubusercontent.com/JZXiang/JZXiang.github.io/blog_code/source/Image/TImePickerDialog-20160601.png" alt=""></p>
 
           
         
